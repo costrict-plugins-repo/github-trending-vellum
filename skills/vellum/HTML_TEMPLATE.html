@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" {{HTML_ATTRS}}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{TITLE}}</title>
+
+    <!-- ↓ Stack-specific head (CDN CSS/JS, fonts, icons) — written once per repo by
+         /vellum init into _context/head.html, based on the detected stack profile.
+         Do not hand-edit this block in a draft; edit _context/head.html and re-run
+         /vellum init, or the next draft/iterate will overwrite your edit. -->
+    {{HEAD_EXTRA}}
+
+    <!-- Vellum baseline styles — minimal, stack-agnostic scaffolding for drafts -->
+    <style data-vellum="base">
+      html,
+      body {
+        height: 100%;
+      }
+      /* Vellum-only debug helper: outline elements when ?debug=1 in URL */
+      body[data-vellum-debug] *:not(svg, path) {
+        outline: 1px dashed rgba(255, 100, 100, 0.25);
+      }
+    </style>
+
+    <script>
+      // Toggle ?debug=1 in URL to outline every block — useful when alignment looks off
+      if (new URLSearchParams(location.search).get("debug") === "1") {
+        document.body?.setAttribute?.("data-vellum-debug", "");
+        document.addEventListener("DOMContentLoaded", () =>
+          document.body.setAttribute("data-vellum-debug", "")
+        );
+      }
+    </script>
+  </head>
+  <body class="{{BODY_CLASS}}">
+    <!-- {{BODY}} -->
+    <!-- Vellum will replace this comment with the generated draft markup. -->
+
+    <!-- ↓ Stack-specific body-end script (e.g. Lucide icon init for Tailwind/shadcn
+         drafts). Written by init into _context/head.html's paired body-script half;
+         empty for stacks that don't need one (e.g. Quasar, which uses inline SVG). -->
+    {{BODY_SCRIPT_EXTRA}}
+  </body>
+</html>
